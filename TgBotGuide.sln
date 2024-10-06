@@ -1,8 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Domain", "TgBotGuide.Domain\TgBotGuide.Domain.csproj", "{A55CCAAB-EB7C-4F62-9BF5-B73826772EEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Application", "TgBotGuide.Application\TgBotGuide.Application.csproj", "{ECD84326-8607-4BEA-BFD5-F0DB352EC834}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Infrastructure", "TgBotGuide.Infrastructure\TgBotGuide.Infrastructure.csproj", "{A0EEA62C-4D8F-4C06-AFC8-FB819E159DF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.API", "TgBotGuide.API\TgBotGuide.API.csproj", "{078D99BA-0B1E-4498-A055-C9E9447C9111}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A55CCAAB-EB7C-4F62-9BF5-B73826772EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A55CCAAB-EB7C-4F62-9BF5-B73826772EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A55CCAAB-EB7C-4F62-9BF5-B73826772EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A55CCAAB-EB7C-4F62-9BF5-B73826772EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECD84326-8607-4BEA-BFD5-F0DB352EC834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECD84326-8607-4BEA-BFD5-F0DB352EC834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECD84326-8607-4BEA-BFD5-F0DB352EC834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECD84326-8607-4BEA-BFD5-F0DB352EC834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0EEA62C-4D8F-4C06-AFC8-FB819E159DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0EEA62C-4D8F-4C06-AFC8-FB819E159DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0EEA62C-4D8F-4C06-AFC8-FB819E159DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0EEA62C-4D8F-4C06-AFC8-FB819E159DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{078D99BA-0B1E-4498-A055-C9E9447C9111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{078D99BA-0B1E-4498-A055-C9E9447C9111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{078D99BA-0B1E-4498-A055-C9E9447C9111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{078D99BA-0B1E-4498-A055-C9E9447C9111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
