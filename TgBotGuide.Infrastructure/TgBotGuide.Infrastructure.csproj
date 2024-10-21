@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Migrations\" />
-      <Folder Include="Repositories\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -21,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\TgBotGuide.Application\TgBotGuide.Application.csproj" />
       <ProjectReference Include="..\TgBotGuide.Domain\TgBotGuide.Domain.csproj" />
     </ItemGroup>
 
