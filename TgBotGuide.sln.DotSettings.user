@@ -1,0 +1,10 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8a923ba8_002D2472_002D4bc1_002D88d6_002D297893ae540f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AddCity_ShouldAddCity" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.CityRepositoryTests.AddCity_ShouldAddCity&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.CityRepositoryTests.GetAllCities_ShouldReturnAllCities&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.CityRepositoryTests.GetByIdAsync_ShouldReturnCity&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.CityRepositoryTests.UpdateCity_ShouldUpdateCity&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.CityRepositoryTests.RemoveCity_ShouldDeleteCity&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
