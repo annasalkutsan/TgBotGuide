@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using TgBotGuide.Application.Interfaces;
 using TgBotGuide.Domain.Entities;
 using TgBotGuide.Infrastructure.Repositories;
 using Xunit;
@@ -8,7 +8,7 @@ namespace TgBotGuide.Infrastructure.Tests
     public class CityRepositoryTests
     {
         private readonly TgBotGuideDbContext _context;
-        private readonly Repository<City> _cityRepository;
+        private readonly IRepository<City> _cityRepository;
 
         public CityRepositoryTests()
         {
