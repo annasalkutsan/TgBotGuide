@@ -1,4 +1,6 @@
-﻿namespace TgBotGuide.Domain.Entities;
+﻿using Domain.ValueObjects;
+
+namespace TgBotGuide.Domain.Entities;
 
 public class Location:BaseEntity 
 {
@@ -7,7 +9,9 @@ public class Location:BaseEntity
     public string Name { get; set; }
     public string Description { get; set; }
     public string Coordinates { get; set; }
-    public string Address { get; set; }
+    public Address Address { get; set; }
+    
+    public string ImageUrl { get; set; }
     public ICollection<LocationCategory> LocationsCategories { get; set; }
 
     public Location()
@@ -15,12 +19,13 @@ public class Location:BaseEntity
         LocationsCategories = new List<LocationCategory>();
     }
     
-    public Location(Guid cityId, string name, string description, string coordinates, string address): this()
+    public Location(Guid cityId, string name, string description, string coordinates, Address address, string imageUrl): this()
     {
         CityId = cityId;
         Name = name;
         Description = description;
         Coordinates = coordinates;
         Address = address;
+        ImageUrl = imageUrl;
     }
 }
