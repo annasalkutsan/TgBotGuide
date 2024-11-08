@@ -21,6 +21,7 @@ public class CityConfiguration: IEntityTypeConfiguration<City>
         
         builder.Property(c => c.Description)
             .HasMaxLength(500)
+            .IsRequired(false)
             .HasColumnName("description");
         
         builder.Property(c=>c.CreationDate)

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TgBotGuide.Infrastructure;
@@ -11,9 +12,11 @@ using TgBotGuide.Infrastructure;
 namespace TgBotGuide.Infrastructure.Migrations
 {
     [DbContext(typeof(TgBotGuideDbContext))]
-    partial class TgBotGuideDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241106132619_AddImageURL")]
+    partial class AddImageURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,6 +59,7 @@ namespace TgBotGuide.Infrastructure.Migrations
                         .HasColumnName("creation_date");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("description");
@@ -93,6 +97,7 @@ namespace TgBotGuide.Infrastructure.Migrations
                         .HasColumnName("creation_date");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("description");

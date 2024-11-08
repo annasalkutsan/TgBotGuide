@@ -6,5 +6,6 @@
     &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.CityRepositoryTests.GetByIdAsync_ShouldReturnCity&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.CityRepositoryTests.UpdateCity_ShouldUpdateCity&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.CityRepositoryTests.RemoveCity_ShouldDeleteCity&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E81D527-0073-407D-919A-544E81A1B5B5::net8.0::TgBotGuide.Infrastructure.Tests.LocationRepositoryTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

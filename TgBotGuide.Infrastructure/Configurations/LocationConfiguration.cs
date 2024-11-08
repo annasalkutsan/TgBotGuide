@@ -21,6 +21,7 @@ public class LocationConfiguration: IEntityTypeConfiguration<Location>
 
         builder.Property(l => l.Description)
             .HasMaxLength(500)
+            .IsRequired(false)
             .HasColumnName("description");
 
         builder.Property(l => l.Coordinates)
@@ -28,10 +29,23 @@ public class LocationConfiguration: IEntityTypeConfiguration<Location>
             .HasMaxLength(100)
             .HasColumnName("coordinates");
 
-        builder.Property(l => l.Address)
+        builder.OwnsOne(l => l.Address, address =>
+        {
+            address.Property(a => a.Street)
+                .IsRequired()
+                .HasMaxLength(200)
+                .HasColumnName("street"); 
+
+            address.Property(a => a.House)
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasColumnName("house"); 
+        });
+
+        builder.Property(l => l.ImageUrl)
             .IsRequired()
             .HasMaxLength(200)
-            .HasColumnName("address");
+            .HasColumnName("image_url");
         
         builder.Property(l => l.CityId)
             .HasColumnName("city_id");
