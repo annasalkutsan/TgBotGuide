@@ -6,6 +6,13 @@ namespace TgBotGuide.Infrastructure;
 
 public class TgBotGuideDbContext: DbContext
 {
+    public TgBotGuideDbContext(DbContextOptions<TgBotGuideDbContext> options)
+        : base(options)
+    {
+    }
+
+    public TgBotGuideDbContext() { }
+
     public DbSet<City> Cities { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<Category> Categories { get; set; }
