@@ -76,7 +76,7 @@ namespace TgBotGuide.Infrastructure.Tests
 
             // Act
             city.Name = "Updated Name";
-            _cityRepository.Update(city);
+            await _cityRepository.UpdateAsync(city);
             await _context.SaveChangesAsync();
 
             // Assert
@@ -92,7 +92,7 @@ namespace TgBotGuide.Infrastructure.Tests
             await _cityRepository.AddAsync(city);
 
             // Act
-            _cityRepository.Remove(city);
+            await _cityRepository.RemoveAsync(city);
             await _context.SaveChangesAsync();
 
             // Assert

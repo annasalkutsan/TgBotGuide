@@ -42,21 +42,15 @@ public class Repository<T>:IRepository<T> where T : class
         await _context.SaveChangesAsync();
     }
 
-    public void Update(T entity)
+    public async Task UpdateAsync(T entity)
     {
         _dbSet.Update(entity);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Remove(T entity)
+    public async Task RemoveAsync(T entity)
     {
         _dbSet.Remove(entity);
-        _context.SaveChanges();
-    }
-
-    public void RemoveRange(ICollection<T> entities)
-    {
-        _dbSet.RemoveRange(entities);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

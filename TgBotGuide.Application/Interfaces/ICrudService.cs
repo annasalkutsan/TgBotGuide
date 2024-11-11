@@ -10,7 +10,7 @@ public interface ICrudService<TEntity, TDto, TResponseDto>
     Task<TResponseDto> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<ICollection<TResponseDto>> GetAllAsync(CancellationToken cancellationToken);
     Task<ICollection<TResponseDto>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
-    Task AddAsync(TDto dto, CancellationToken cancellationToken);
-    Task UpdateAsync(Guid id, TDto dto, CancellationToken cancellationToken);
+    Task<TResponseDto> AddAsync(TDto dto, CancellationToken cancellationToken);
+    Task<TResponseDto> UpdateAsync(Guid id, TDto dto, CancellationToken cancellationToken);
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

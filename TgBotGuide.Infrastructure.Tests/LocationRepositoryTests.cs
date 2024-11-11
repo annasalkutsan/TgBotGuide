@@ -93,7 +93,7 @@ namespace TgBotGuide.Infrastructure.Tests
             location.Name = "Updated Location";
             location.Address = new Address("Updated Street", "456");
             location.Description = "Updated Description";
-            _locationRepository.Update(location);
+            await _locationRepository.UpdateAsync(location);
             await _context.SaveChangesAsync();
 
             // Assert
@@ -112,7 +112,7 @@ namespace TgBotGuide.Infrastructure.Tests
             await _context.SaveChangesAsync();
 
             // Act
-            _locationRepository.Remove(location);
+            await _locationRepository.RemoveAsync(location);
             await _context.SaveChangesAsync();
 
             // Assert
