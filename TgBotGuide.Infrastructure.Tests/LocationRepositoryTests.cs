@@ -1,6 +1,6 @@
 ﻿using Domain.ValueObjects;
-using TgBotGuide.Application.Interfaces;
 using TgBotGuide.Domain.Entities;
+using TgBotGuide.Domain.Interfaces;
 using TgBotGuide.Infrastructure.Repositories;
 using Xunit;
 

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace TgBotGuide.Application.Interfaces;
+namespace TgBotGuide.Domain.Interfaces;
 
 public interface IRepository<T> where T : class
 {

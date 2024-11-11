@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using TgBotGuide.Application.Interfaces;
+using TgBotGuide.Domain.Interfaces;
 
 namespace TgBotGuide.Infrastructure.Repositories;
 
