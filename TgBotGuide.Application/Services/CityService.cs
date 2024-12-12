@@ -10,10 +10,10 @@ namespace TgBotGuide.Application.Services
 {
     public class CityService : ICityService
     {
-        private readonly IRepository<City> _repository;
+        private readonly ICityRepository _repository;
         private readonly IMapper _mapper;
 
-        public CityService(IRepository<City> repository, IMapper mapper)
+        public CityService(ICityRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

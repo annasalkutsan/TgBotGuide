@@ -10,15 +10,15 @@ namespace TgBotGuide.Application.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IRepository<Category> _repository;
-        private readonly IRepository<Location> _locationRepository; // Репозиторий для локаций
-        private readonly IRepository<LocationCategory> _locationCategoryRepository; // Репозиторий для связи
+        private readonly ICategoryRepository _repository;
+        private readonly ILocationRepository _locationRepository; // Репозиторий для локаций
+        private readonly ILocationCategoryRepository _locationCategoryRepository; // Репозиторий для связи
         private readonly IMapper _mapper;
 
         public CategoryService(
-            IRepository<Category> repository,
-            IRepository<Location> locationRepository,
-            IRepository<LocationCategory> locationCategoryRepository,
+            ICategoryRepository repository,
+            ILocationRepository locationRepository,
+            ILocationCategoryRepository locationCategoryRepository,
             IMapper mapper)
         {
             _repository = repository;
