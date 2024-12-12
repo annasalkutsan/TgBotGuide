@@ -8,12 +8,12 @@ namespace TgBotGuide.Infrastructure.Tests
     public class CityRepositoryTests
     {
         private readonly TgBotGuideDbContext _context;
-        private readonly IRepository<City> _cityRepository;
+        private readonly CityRepository _cityRepository;
 
         public CityRepositoryTests()
         {
             _context = new TgBotGuideDbContext();
-            _cityRepository = new Repository<City>(_context);
+            _cityRepository = new CityRepository(_context);
         }
 
         [Fact]

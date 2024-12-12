@@ -1,0 +1,8 @@
+﻿using TgBotGuide.Domain.Entities;
+
+namespace TgBotGuide.Domain.Interfaces;
+
+public interface ILocationCategoryRepository:IRepository<LocationCategory>
+{
+    
+}

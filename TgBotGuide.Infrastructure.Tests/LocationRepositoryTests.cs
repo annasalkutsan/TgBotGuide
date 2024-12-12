@@ -9,12 +9,12 @@ namespace TgBotGuide.Infrastructure.Tests
     public class LocationRepositoryTests
     {
         private readonly TgBotGuideDbContext _context;
-        private readonly IRepository<Location> _locationRepository;
+        private readonly LocationRepository _locationRepository;
 
         public LocationRepositoryTests()
         {
             _context = new TgBotGuideDbContext();
-            _locationRepository = new Repository<Location>(_context);
+            _locationRepository = new LocationRepository(_context);
         }
 
         [Fact]
