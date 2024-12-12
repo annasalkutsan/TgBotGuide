@@ -4,7 +4,7 @@ using TgBotGuide.Domain.Interfaces;
 
 namespace TgBotGuide.Infrastructure.Repositories;
 
-public class Repository<T>:IRepository<T> where T : class
+public abstract class Repository<T>:IRepository<T> where T : class
 {
     private readonly TgBotGuideDbContext _context;
     private readonly DbSet<T> _dbSet;

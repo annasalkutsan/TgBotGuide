@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using TgBotGuide.Application.Interfaces;
 using TgBotGuide.Application.Mapping;
 using TgBotGuide.Application.Services;
-using TgBotGuide.Domain.Entities;
 using TgBotGuide.Domain.Interfaces;
 using TgBotGuide.Infrastructure;
 using TgBotGuide.Infrastructure.Repositories;
@@ -19,16 +18,16 @@ builder.Services.AddDbContext<TgBotGuideDbContext>(options =>
     options.UseNpgsql(connectionString);
 });
 
-builder.Services.AddScoped<IRepository<Category>, Repository<Category>>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-builder.Services.AddScoped<IRepository<City>, Repository<City>>();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityService, CityService>();
 
-builder.Services.AddScoped<IRepository<Location>, Repository<Location>>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 
-builder.Services.AddScoped<IRepository<LocationCategory>, Repository<LocationCategory>>();
+builder.Services.AddScoped<ILocationCategoryRepository, LocationCategoryRepository>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
