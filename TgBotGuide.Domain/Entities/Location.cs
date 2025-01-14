@@ -8,24 +8,15 @@ public class Location:BaseEntity
     public City City { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public string Coordinates { get; set; }
-    public Address Address { get; set; }
-    
+    public string MapUrl { get; set; }
     public string ImageUrl { get; set; }
-    public ICollection<LocationCategory> LocationsCategories { get; set; }
-
-    public Location()
-    {
-        LocationsCategories = new List<LocationCategory>();
-    }
     
-    public Location(Guid cityId, string name, string description, string coordinates, Address address, string imageUrl): this()
+    public Location(Guid cityId, string name, string description, string mapUrl, string imageUrl)
     {
         CityId = cityId;
         Name = name;
         Description = description;
-        Coordinates = coordinates;
-        Address = address;
+        MapUrl = mapUrl;
         ImageUrl = imageUrl;
     }
 }

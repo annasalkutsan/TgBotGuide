@@ -45,19 +45,6 @@ namespace TgBotGuide.API.Controllers
         
             return Ok(locations);
         }
-    
-        // Получить локацию по категории
-        [HttpGet("by-category/{categoryId}")]
-        public async Task<IActionResult> GetByCategory(Guid categoryId, CancellationToken cancellationToken)
-        {
-            // Создаем предикат для поиска локаций по категории
-            Expression<Func<Location, bool>> predicate = l => l.LocationsCategories.Any(c => c.CategoryId == categoryId);
-        
-            // Вызываем универсальный метод с предикатом
-            var locations = await _locationService.FindAsync(predicate, cancellationToken);
-        
-            return Ok(locations);
-        }
         
         // Добавить локацию
         [HttpPost]
@@ -80,14 +67,6 @@ namespace TgBotGuide.API.Controllers
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
             await _locationService.DeleteAsync(id, cancellationToken);
-            return NoContent();
-        }
-
-        // Добавить категорию к локации
-        [HttpPost("{locationId}/categories/{categoryId}")]
-        public async Task<IActionResult> AddCategoryToLocation(Guid locationId, Guid categoryId, CancellationToken cancellationToken)
-        {
-            await _locationService.AddCategoryToLocationAsync(locationId, categoryId, cancellationToken);
             return NoContent();
         }
     }

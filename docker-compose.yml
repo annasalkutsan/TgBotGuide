@@ -1,0 +1,12 @@
+﻿services:
+  tgbotguide.telegram:
+    image: tgbotguide.telegram
+    build:
+      context: .
+      dockerfile: TgBotGuide.Telegram/Dockerfile
+
+  tgbotguide.bot:
+    image: tgbotguide.bot
+    build:
+      context: .
+      dockerfile: TgBotGuide.Bot/Dockerfile

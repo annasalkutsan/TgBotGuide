@@ -11,19 +11,13 @@ namespace TgBotGuide.Application.Services
     public class LocationService : ILocationService
     {
         private readonly ILocationRepository _repository;
-        private readonly ILocationCategoryRepository _locationCategoryRepository; // Репозиторий для связи
-        private readonly ICategoryRepository _categoryRepository; // Репозиторий для категорий
         private readonly IMapper _mapper;
 
         public LocationService(
             ILocationRepository repository,
-            ILocationCategoryRepository locationCategoryRepository,
-            ICategoryRepository categoryRepository,
             IMapper mapper)
         {
             _repository = repository;
-            _locationCategoryRepository = locationCategoryRepository;
-            _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
 
@@ -73,26 +67,6 @@ namespace TgBotGuide.Application.Services
             {
                 await _repository.RemoveAsync(location);  // Используем асинхронный метод RemoveAsync
             }
-        }
-
-        // Добавление категории к локации
-        public async Task AddCategoryToLocationAsync(Guid locationId, Guid categoryId, CancellationToken cancellationToken)
-        {
-            var location = await _repository.GetByIdAsync(locationId);
-            var category = await _categoryRepository.GetByIdAsync(categoryId);
-
-            if (location == null || category == null)
-            {
-                throw new ArgumentException("Location or Category not found.");
-            }
-
-            var locationCategory = new LocationCategory
-            {
-                LocationId = locationId,
-                CategoryId = categoryId
-            };
-
-            await _locationCategoryRepository.AddAsync(locationCategory);
         }
     }
 }

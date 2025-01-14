@@ -5,6 +5,4 @@ using TgBotGuide.Domain.Entities;
 namespace TgBotGuide.Application.Interfaces;
 
 public interface ILocationService : ICrudService<Location, LocationDto, LocationResponseDto>
-{
-    Task AddCategoryToLocationAsync(Guid locationId, Guid categoryId, CancellationToken cancellationToken);
-}
+{ }
