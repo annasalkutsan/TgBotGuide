@@ -14,12 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Чтение конфигурации из appsettings.json.
 builder.Services.Configure<TelegramBotOptions>(builder.Configuration.GetSection("TelegramBot"));
 
-// Регистрация TelegramBotService с инъекцией зависимостей.
-builder.Services.AddSingleton<TelegramBotService>(provider =>
+builder.Services.AddScoped<TelegramBotService>(provider =>
 {
     var options = provider.GetRequiredService<IOptions<TelegramBotOptions>>().Value;
     var botClient = new TelegramBotClient(options.Token);
-    return new TelegramBotService(botClient, options);
+    return new TelegramBotService(botClient, 
+        provider.GetRequiredService<ICityService>(), 
+        provider.GetRequiredService<ILocationService>());
 });
 
 // Добавляем контроллеры.
@@ -33,7 +34,7 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DataBase");
 builder.Services.AddDbContext<TgBotGuideDbContext>(options =>
 {
-    options.UseNpgsql(connectionString); // Используем PostgreSQL как СУБД.
+    options.UseNpgsql(connectionString); 
 });
 
 builder.Services.AddScoped<ICityRepository, CityRepository>();
@@ -45,16 +46,14 @@ builder.Services.AddScoped<ILocationService, LocationService>();
 // Добавляем AutoMapper для автоматического сопоставления объектов DTO.
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// Добавляем валидацию через FluentValidation (раскомментируйте при необходимости).
-// builder.Services.AddValidatorsFromAssemblyContaining<EmployeeRequestValidator>();
-
 var app = builder.Build();
 
-// Установка webhook для TelegramBot (вызов в начале жизненного цикла приложения).
+// Запускаем polling для получения обновлений от Telegram
 using (var scope = app.Services.CreateScope())
 {
     var telegramBotService = scope.ServiceProvider.GetRequiredService<TelegramBotService>();
-    await telegramBotService.ConfigureWebhookAsync(); // Метод для установки webhook.
+    var cancellationToken = app.Lifetime.ApplicationStopping;
+    await telegramBotService.StartPollingAsync(cancellationToken);
 }
 
 // Включаем Swagger в режиме разработки.

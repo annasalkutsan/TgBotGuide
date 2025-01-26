@@ -4,7 +4,4 @@ using TgBotGuide.Domain.Entities;
 
 namespace TgBotGuide.Application.Interfaces;
 
-public interface ICityService : ICrudService<City, CityDto, CityResponseDto>
-{
-    
-}
+public interface ICityService : ICrudService<City, CityDto, CityResponseDto>;
