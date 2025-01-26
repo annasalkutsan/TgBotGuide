@@ -125,10 +125,10 @@ public class TelegramBotService
         var locations = await _locationService.FindAsync(location => location.CityId == cityId, CancellationToken.None);
 
         var inlineKeyboard = new InlineKeyboardMarkup(locations.Select(location =>
-            new InlineKeyboardButton[] { InlineKeyboardButton.WithCallbackData(location.Name, $"location_{location.Id}") }
+            new InlineKeyboardButton[] { InlineKeyboardButton.WithCallbackData(location.Name, $"location_{location.Name}") }
         ).ToArray());
 
-        // Добавляем кнопку "Назад" в меню с местами
+        // Добавляем кнопку "Назад"
         inlineKeyboard.InlineKeyboard = inlineKeyboard.InlineKeyboard.Concat(new[] 
         {
             new InlineKeyboardButton[] { InlineKeyboardButton.WithCallbackData("Назад", "choose_city") }
@@ -136,7 +136,7 @@ public class TelegramBotService
 
         await _botClient.SendTextMessageAsync(
             chatId: chatId,
-            text: $"Вы выбрали город {city.Name}. Вот места, которые мы советуем вам посетить.",
+            text: $"Вы выбрали город {city.Name}. Вот места, которые мы советуем вам посетить:",
             replyMarkup: inlineKeyboard
         );
     }
@@ -166,27 +166,37 @@ public class TelegramBotService
         var data = callbackQuery.Data;
         var chatId = callbackQuery.Message.Chat.Id;
 
-        if (data.StartsWith("city_"))
+        if (data.StartsWith("location_"))
         {
-            var cityId = Guid.Parse(data.Substring(5));
-            await ShowCityDetails(cityId, chatId);
-        }
-        else if (data == "start_menu")
-        {
-            await ShowStartMenu(chatId);
+            var locationName = data.Substring(9); // Получаем имя локации
+            var locations = await _locationService.FindAsync(l => l.Name == locationName, CancellationToken.None);
+
+            if (locations.Any())
+            {
+                var location = locations.First();
+                await ShowLocationDetails(location.Id, chatId); // Отображаем детали локации
+            }
+            else
+            {
+                await _botClient.SendTextMessageAsync(chatId, "Локация не найдена.");
+            }
         }
         else if (data == "choose_city")
         {
             await ShowCitySelection(chatId);
         }
-        else if (data.StartsWith("location_"))
+        else if (data.StartsWith("city_"))
         {
-            var locationId = Guid.Parse(data.Substring(10));
-            await ShowLocationDetails(locationId, chatId);
+            var cityId = Guid.Parse(data.Substring(5));
+            await ShowCityDetails(cityId, chatId);
         }
-        else if (data == "info")
+        else if (data.StartsWith("info"))
         {
             await ShowBotInfo(chatId);
+        }
+        else if (data == "start_menu")
+        {
+            await ShowStartMenu(chatId);
         }
     }
 }
