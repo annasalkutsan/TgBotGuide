@@ -66,5 +66,7 @@ namespace TgBotGuide.Application.Services
                 await _repository.RemoveAsync(city);  // Используем асинхронный метод RemoveAsync
             }
         }
+
+       
     }
 }

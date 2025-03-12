@@ -15,8 +15,6 @@ public class TgBotGuideDbContext: DbContext
 
     public DbSet<City> Cities { get; set; }
     public DbSet<Location> Locations { get; set; }
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<LocationCategory> LocationsCategories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
