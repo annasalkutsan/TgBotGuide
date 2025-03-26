@@ -4,6 +4,8 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 using TgBotGuide.Application.Interfaces;
 
+namespace TgBotGuide.Application.Services;
+
 public class TelegramBotService
 {
     private readonly ITelegramBotClient _botClient;

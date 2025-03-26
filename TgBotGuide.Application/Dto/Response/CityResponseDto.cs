@@ -1,8 +1,8 @@
 ﻿namespace TgBotGuide.Application.Dto.Response;
 
-public class CityResponseDto
+public record CityResponseDto
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public Guid Id { get; init; }
+    public string Name { get; init; }
+    public string Description { get; init; }
 }

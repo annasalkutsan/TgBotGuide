@@ -1,12 +1,11 @@
 ﻿namespace TgBotGuide.Application.Dto.Response;
 
-public class LocationResponseDto
+public record LocationResponseDto
 {
-    public Guid Id { get; set; }
-    public Guid CityId { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string MapUrl { get; set; }
-    public string ImageUrl { get; set; }
-
+    public Guid Id { get; init; }
+    public Guid CityId { get; init; }
+    public string Name { get; init; }
+    public string Description { get; init; }
+    public string MapUrl { get; init; }
+    public string? ImageUrl { get; init; }
 }

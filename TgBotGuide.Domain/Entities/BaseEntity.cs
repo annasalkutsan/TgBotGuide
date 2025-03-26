@@ -1,20 +1,38 @@
-﻿namespace TgBotGuide.Domain.Entities;
+﻿using Ardalis.GuardClauses;
 
-public class BaseEntity
+namespace TgBotGuide.Domain.Entities;
+
+public abstract class BaseEntity<T>
 {
-    public Guid Id { get; set; }
-    public DateTime CreationDate { get; set; } = DateTime.UtcNow;
-    
+    /// <summary>
+    /// Конструктор для сущности с определённым идентификатором
+    /// </summary>
+    /// <param name="id">Идентификатор сущности</param>
+    protected BaseEntity(
+        T id
+    )
+    {
+        Id = Guard.Against.Default(id, nameof(id));
+        CreationDate = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Идентификатор сущности
+    /// </summary>
+    public T Id { get; }
+
+    public DateTime CreationDate { get; private set; }
+
     public override bool Equals(object? obj)
     {
-        if (obj is not BaseEntity entity)
+        if (obj is not BaseEntity<T> entity)
         {
             return false;
         }
 
         if (ReferenceEquals(this, entity)) return true;
 
-        return Id == entity.Id;
+        return Id.Equals(entity.Id);
     }
 
     public override int GetHashCode()

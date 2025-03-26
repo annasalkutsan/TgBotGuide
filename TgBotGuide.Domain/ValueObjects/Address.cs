@@ -1,38 +1,45 @@
-﻿namespace Domain.ValueObjects
+﻿using Ardalis.GuardClauses;
+
+namespace TgBotGuide.Domain.ValueObjects;
+
+/// <summary>
+/// Объект значения, представляющий адрес.
+/// </summary>
+public class Address : BaseValueObject
 {
+    private string _street;
+    private string _house;
+
     /// <summary>
-    /// Объект значения, представляющий адрес.
+    /// Конструктор для инициализации адреса с валидацией.
     /// </summary>
-    public class Address : BaseValueObject
+    /// <param name="street">Улица.</param>
+    /// <param name="house">Номер дома.</param>
+    public Address(string street, string house)
     {
-        /// <summary>
-        /// Конструктор для инициализации адреса.
-        /// </summary>
-        /// <param name="street">Улица.</param>
-        /// <param name="house">Номер дома.</param>
-        public Address( string street, string house)
-        {
-            Street = street;
-            House = house;
-        }
+        Street = street;
+        House = house;
+    }
 
-        /// <summary>
-        /// Улица.
-        /// </summary>
-        public string Street { get; private set; }
+    public Address()
+    {
+    }
 
-        /// <summary>
-        /// Номер дома.
-        /// </summary>
-        public string House { get; private set; }
+    /// <summary>
+    /// Улица.
+    /// </summary>
+    public string Street
+    {
+        get => _street;
+        private set => _street = Guard.Against.NullOrEmpty(value, nameof(value));
+    }
 
-        /// <summary>
-        /// Возвращает строковое представление адреса.
-        /// </summary>
-        /// <returns>Строка, представляющая адрес.</returns>
-        public override string ToString()
-        {
-            return $"{Street}, {House}";
-        }
+    /// <summary>
+    /// Номер дома.
+    /// </summary>
+    public string House
+    {
+        get => _house;
+        private set => _house = Guard.Against.NullOrEmpty(value, nameof(value));
     }
 }

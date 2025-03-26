@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Domain.ValueObjects
+namespace TgBotGuide.Domain.ValueObjects
 {
     /// <summary>
     /// Базовый класс для всех объектов значений, обеспечивающий сравнение и вычисление хеш-кода на основе всех полей и свойств.
