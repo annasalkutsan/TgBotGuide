@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Shared.Application.Interfaces;
+using Shared.Infrastructure;
 using Telegram.Bot;
 using TgBotGuide.Application;
 using TgBotGuide.Application.Interfaces;
+using TgBotGuide.Application.Interfaces.Repositories;
 using TgBotGuide.Application.Mapping;
 using TgBotGuide.Application.Services;
-using TgBotGuide.Domain.Interfaces;
 using TgBotGuide.Infrastructure;
 using TgBotGuide.Infrastructure.Repositories;
 
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<TgBotGuideDbContext>(options =>
 {
     options.UseNpgsql(connectionString); 
 });
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork<TgBotGuideDbContext>>();
 
 builder.Services.AddScoped<MappingProfile>();
 

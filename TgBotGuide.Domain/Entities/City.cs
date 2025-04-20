@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using Shared.Domain;
 
 namespace TgBotGuide.Domain.Entities;
 

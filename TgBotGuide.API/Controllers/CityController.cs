@@ -35,7 +35,7 @@ namespace TgBotGuide.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CityDto cityDto, CancellationToken cancellationToken)
         {
-            var response = await _cityService.AddAsync(cityDto, cancellationToken);
+            var response = await _cityService.Add(cityDto, cancellationToken);
             return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
         }
 
@@ -43,7 +43,7 @@ namespace TgBotGuide.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] CityDto cityDto, CancellationToken cancellationToken)
         {
-            var response = await _cityService.UpdateAsync(id, cityDto, cancellationToken);
+            var response = await _cityService.Update(id, cityDto, cancellationToken);
             return Ok(response);
         }
 
@@ -51,7 +51,7 @@ namespace TgBotGuide.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
-            await _cityService.DeleteAsync(id, cancellationToken);
+            await _cityService.Remove(id, cancellationToken);
             return NoContent();
         }
     }

@@ -7,8 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1">
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Shared.Application\Shared.Application.csproj" />
       <ProjectReference Include="..\Shared.Domain\Shared.Domain.csproj" />
-      <ProjectReference Include="..\Shared\Shared.Domain\Shared.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -50,7 +50,7 @@ namespace TgBotGuide.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] LocationDto locationDto, CancellationToken cancellationToken)
         {
-            var response = await _locationService.AddAsync(locationDto, cancellationToken);
+            var response = await _locationService.Add(locationDto, cancellationToken);
             return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
         }
 
@@ -58,7 +58,7 @@ namespace TgBotGuide.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] LocationDto locationDto, CancellationToken cancellationToken)
         {
-            var response = await _locationService.UpdateAsync(id, locationDto, cancellationToken);
+            var response = await _locationService.Update(id, locationDto, cancellationToken);
             return Ok(response);
         }
 
@@ -66,7 +66,7 @@ namespace TgBotGuide.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
-            await _locationService.DeleteAsync(id, cancellationToken);
+            await _locationService.Remove(id, cancellationToken);
             return NoContent();
         }
     }
