@@ -16,22 +16,22 @@ public class LocationConfiguration: IEntityTypeConfiguration<Location>
 
         builder.Property(l => l.Name)
             .IsRequired()
-            .HasMaxLength(100)
+            .HasMaxLength(500)
             .HasColumnName("name");
 
         builder.Property(l => l.Description)
-            .HasMaxLength(500)
+            .HasMaxLength(1500)
             .IsRequired(false)
             .HasColumnName("description");
 
         builder.Property(l => l.MapUrl)
             .IsRequired()
-            .HasMaxLength(100)
+            .HasMaxLength(1500)
             .HasColumnName("mapUrl");
 
         builder.Property(l => l.ImageUrl)
             .IsRequired()
-            .HasMaxLength(200)
+            .HasMaxLength(2000)
             .HasColumnName("image_url");
         
         builder.Property(l => l.CityId)
@@ -39,11 +39,5 @@ public class LocationConfiguration: IEntityTypeConfiguration<Location>
 
         builder.Property(l => l.CreationDate)
             .HasColumnName("creation_date");
-
-        // с Cities (1:N)
-        builder.HasOne(l => l.City)
-            .WithMany(c => c.Locations)
-            .HasForeignKey(l => l.CityId)
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }

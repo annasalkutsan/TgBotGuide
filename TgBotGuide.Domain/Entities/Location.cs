@@ -36,11 +36,6 @@ public class Location : BaseEntity<Guid>
     public Guid CityId { get; private set; }
 
     /// <summary>
-    /// Город, к которому относится локация
-    /// </summary>
-    public virtual City City { get; private set; }
-
-    /// <summary>
     /// Название локации
     /// </summary>
     public string Name

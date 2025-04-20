@@ -13,12 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\TgBotGuide.Application\TgBotGuide.Application.csproj" />
       <ProjectReference Include="..\TgBotGuide.Infrastructure\TgBotGuide.Infrastructure.csproj" />
     </ItemGroup>
