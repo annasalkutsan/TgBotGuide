@@ -1,5 +1,7 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Telegram.Bot;
 using TgBotGuide.Application;
 using TgBotGuide.Application.Interfaces;
@@ -13,14 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Чтение конфигурации из appsettings.json.
 builder.Services.Configure<TelegramBotOptions>(builder.Configuration.GetSection("TelegramBot"));
-
-builder.Services.AddScoped<TelegramBotService>(provider =>
+builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddSingleton<ITelegramBotClient>(provider =>
 {
     var options = provider.GetRequiredService<IOptions<TelegramBotOptions>>().Value;
-    var botClient = new TelegramBotClient(options.Token);
-    return new TelegramBotService(botClient, 
-        provider.GetRequiredService<ICityService>(), 
-        provider.GetRequiredService<ILocationService>());
+    return new TelegramBotClient(options.Token);
+});
+builder.Services.AddScoped<TelegramBotService>(provider =>
+{
+    var botClient = provider.GetRequiredService<ITelegramBotClient>();
+    return new TelegramBotService(botClient, provider.GetRequiredService<IMenuService>());
 });
 
 // Добавляем контроллеры.
@@ -28,14 +32,28 @@ builder.Services.AddControllers();
 
 // Добавляем Swagger для документации API.
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Skills.Api",
+        Description = "API для работы с сущностью Skill  в рамках проекта StaffPro",
+        Version = "v1",
+    });
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+    //options.EnableAnnotations();
+    //options.ExampleFilters();
+});
+
+//builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetExecutingAssembly());
+
 
 // Настройка подключения к базе данных.
 var connectionString = builder.Configuration.GetConnectionString("DataBase");
-builder.Services.AddDbContext<TgBotGuideDbContext>(options =>
-{
-    options.UseNpgsql(connectionString); 
-});
+builder.Services.AddDbContext<TgBotGuideDbContext>(options => { options.UseNpgsql(connectionString); });
 
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityService, CityService>();
@@ -56,20 +74,17 @@ using (var scope = app.Services.CreateScope())
     await telegramBotService.StartPollingAsync(cancellationToken);
 }
 
-// Включаем Swagger в режиме разработки.
+// Настраиваем маршрутизацию контроллеров.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Включаем перенаправление на HTTPS.
-app.UseHttpsRedirection();
+app.MapGet("/api/ping", () => "pong")
+    .WithName("Ping")
+    .WithTags("Check");
 
-// Добавляем авторизацию (в данном коде отсутствует аутентификация, это placeholder).
-app.UseAuthorization();
-
-// Настраиваем маршрутизацию контроллеров.
 app.MapControllers();
 
 app.Run();
