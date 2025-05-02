@@ -1,5 +1,14 @@
+# Build artifacts
 bin/
 obj/
+
+# NuGet packages folder
 /packages/
+
+# Rider project files
 riderModule.iml
-/_ReSharper.Caches/
+/.idea/
+*/.idea/
+
+# ReSharper cache
+_ReSharper.Caches/

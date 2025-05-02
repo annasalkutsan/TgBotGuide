@@ -6,16 +6,17 @@ using TgBotGuide.Infrastructure.Refit.Interfaces;
 using TgBotGuide.Infrastructure.Refit.Interfaces.Services;
 using TgBotGuide.Infrastructure.Refit.Options;
 using TgBotGuide.Infrastructure.Refit.Services;
+using RefitSettings = TgBotGuide.Infrastructure.Refit.Options.RefitSettings;
 
 namespace TgBotGuide.Infrastructure.Refit.Extensions;
 
-public static class RefitServiceCollectionExtensions
+public static class RefitExtensions
 {
-    public static IServiceCollection AddExternalApis(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddRefit(this IServiceCollection services, IConfiguration configuration)
     {
-        // Зарегистрировать и валидировать RefitOptions
-        services.AddOptions<RefitOptions>()
-            .Bind(configuration.GetSection(nameof(RefitOptions)))
+        // Зарегистрировать и валидировать RefitSettings
+        services.AddOptions<RefitSettings>()
+            .Bind(configuration.GetSection(nameof(RefitSettings)))
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
@@ -23,7 +24,7 @@ public static class RefitServiceCollectionExtensions
         services.AddRefitClient<ICityApi>()
             .ConfigureHttpClient((serviceProvider, client) =>
             {
-                var options = serviceProvider.GetRequiredService<IOptions<RefitOptions>>().Value;
+                var options = serviceProvider.GetRequiredService<IOptions<RefitSettings>>().Value;
                 client.BaseAddress = new Uri(options.BaseUrl);
             });
         services.AddScoped<ICityApiService, CityApiService>();
@@ -31,7 +32,7 @@ public static class RefitServiceCollectionExtensions
         services.AddRefitClient<ILocationApi>()
             .ConfigureHttpClient((serviceProvider, client) =>
             {
-                var options = serviceProvider.GetRequiredService<IOptions<RefitOptions>>().Value;
+                var options = serviceProvider.GetRequiredService<IOptions<RefitSettings>>().Value;
                 client.BaseAddress = new Uri(options.BaseUrl);
             });
         services.AddScoped<ILocationApiService, LocationApiService>();

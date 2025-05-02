@@ -1,49 +1,40 @@
 using Microsoft.EntityFrameworkCore;
-using TgBotGuide.Application.Interfaces;
+using TgBotGuide.API.Extensions;
 using TgBotGuide.Application.Mapping;
-using TgBotGuide.Application.Services;
-using TgBotGuide.Domain.Interfaces;
 using TgBotGuide.Infrastructure.DataBase;
-using TgBotGuide.Infrastructure.DataBase.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Настройка подключения к базе данных.
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 var connectionString = builder.Configuration.GetConnectionString("DataBase");
 builder.Services.AddDbContext<TgBotGuideDbContext>(options => { options.UseNpgsql(connectionString); });
 
-builder.Services.AddScoped<ICityRepository, CityRepository>();
-builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddRepositories();
+builder.Services.AddApplicationServices();
 
-builder.Services.AddScoped<ILocationRepository, LocationRepository>();
-builder.Services.AddScoped<ILocationService, LocationService>();
-
-// Добавляем AutoMapper для автоматического сопоставления объектов DTO.
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// Добавление контроллеров
 builder.Services.AddControllers();
 
-// Добавление Swagger и OpenAPI
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 var app = builder.Build();
 
-// Настройка Swagger для режима разработки
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Маршрут для проверки
 app.MapGet("/api/ping", () => "pong")
     .WithName("Ping")
     .WithTags("Check")
     .WithOpenApi();
 
-// Добавление маршрутов для контроллеров
 app.MapControllers();
 
 app.Run();

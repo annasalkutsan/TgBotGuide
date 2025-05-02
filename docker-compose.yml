@@ -1,12 +1,59 @@
 ﻿services:
-  tgbotguide.telegram:
-    image: tgbotguide.telegram
-    build:
-      context: .
-      dockerfile: TgBotGuide.Telegram/Dockerfile
+  postgres:
+    image: postgres:13
+    env_file:
+      - .env
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DATABASE}"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - api_network
 
-  tgbotguide.bot:
-    image: tgbotguide.bot
+  api:
     build:
       context: .
-      dockerfile: TgBotGuide.Bot/Dockerfile
+      dockerfile: ./SolutionItems/DockerfileApi
+    image: api
+    ports:
+      - "${API_PORT}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - api_network
+    env_file:
+      - .env
+    environment:
+      - ConnectionStrings__DataBase=${CONNECTION_STRING_DB}
+    restart: always
+
+  migrator:
+    build:
+      context: .
+      dockerfile: ./SolutionItems/DockerfileMigrator
+    image: migrator
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - CONNECTION_STRING=${CONNECTION_STRING_DB}
+    entrypoint: [ "dotnet", "TgBotGuide.Infrastructure.Migrator.dll" ]
+    restart: on-failure
+    networks:
+      - api_network
+
+networks:
+  api_network:
+    driver: bridge

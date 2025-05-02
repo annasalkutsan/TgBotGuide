@@ -1,6 +1,6 @@
 ﻿namespace TgBotGuide.Infrastructure.Refit.Options;
 
-public class RefitOptions
+public class RefitSettings
 {
     public string BaseUrl { get; set; }
 }

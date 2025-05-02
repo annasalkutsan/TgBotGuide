@@ -6,9 +6,15 @@ using TgBotGuide.Infrastructure.Bot.Services;
 using TgBotGuide.Infrastructure.Refit.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddExternalApis(builder.Configuration);
 
-builder.Services.Configure<TelegramBotOptions>(builder.Configuration.GetSection("TelegramBot"));
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
+builder.Services.AddRefit(builder.Configuration);
+
+builder.Services.Configure<TelegramBotOptions>(builder.Configuration.GetSection(nameof(TelegramBotOptions)));
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddSingleton<ITelegramBotClient>(provider =>
 {
@@ -20,7 +26,6 @@ builder.Services.AddScoped<TelegramBotService>(provider =>
     var botClient = provider.GetRequiredService<ITelegramBotClient>();
     return new TelegramBotService(botClient, provider.GetRequiredService<IMenuService>());
 });
-
 
 var app = builder.Build();
 
