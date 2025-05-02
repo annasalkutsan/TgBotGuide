@@ -46,6 +46,19 @@ namespace TgBotGuide.API.Controllers
             return Ok(locations);
         }
         
+        // Получить локацию по городу
+        [HttpGet("by-name/{locationName}")]
+        public async Task<IActionResult> GetByName(string locationName, CancellationToken cancellationToken)
+        {
+            // Создаем предикат для поиска локаций по городу
+            Expression<Func<Location, bool>> predicate = l => l.Name == locationName;
+        
+            // Вызываем универсальный метод с предикатом
+            var locations = await _locationService.FindAsync(predicate, cancellationToken);
+        
+            return Ok(locations);
+        }
+        
         // Добавить локацию
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] LocationDto locationDto, CancellationToken cancellationToken)

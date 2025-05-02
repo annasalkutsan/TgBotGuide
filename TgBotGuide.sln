@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Domain", "TgBotG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Application", "TgBotGuide.Application\TgBotGuide.Application.csproj", "{ECD84326-8607-4BEA-BFD5-F0DB352EC834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Infrastructure", "TgBotGuide.Infrastructure\TgBotGuide.Infrastructure.csproj", "{A0EEA62C-4D8F-4C06-AFC8-FB819E159DF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Infrastructure.DataBase", "TgBotGuide.Infrastructure.DataBase\TgBotGuide.Infrastructure.DataBase.csproj", "{A0EEA62C-4D8F-4C06-AFC8-FB819E159DF4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{66F0593A-E122-4ECE-B998-EB22C07C5B72}"
 EndProject
@@ -15,6 +15,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{EEC5D5CE-105A-4FF6-A659-56AF71C1436F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.API", "TgBotGuide.API\TgBotGuide.API.csproj", "{3E7EFBD8-A478-44FC-A7EF-6384785499B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Infrastructure.Bot", "TgBotGuide.Infrastructure.Bot\TgBotGuide.Infrastructure.Bot.csproj", "{A3C7AD97-D2B8-4FB1-881E-F1F37ACFDAAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotGuide.Infrastructure.Refit", "TgBotGuide.Infrastructure.Refit\TgBotGuide.Infrastructure.Refit.csproj", "{26EF67C7-A9A4-4242-B5CD-D03EB0E7EAEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,11 +42,21 @@ Global
 		{3E7EFBD8-A478-44FC-A7EF-6384785499B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7EFBD8-A478-44FC-A7EF-6384785499B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7EFBD8-A478-44FC-A7EF-6384785499B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3C7AD97-D2B8-4FB1-881E-F1F37ACFDAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C7AD97-D2B8-4FB1-881E-F1F37ACFDAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C7AD97-D2B8-4FB1-881E-F1F37ACFDAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C7AD97-D2B8-4FB1-881E-F1F37ACFDAAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26EF67C7-A9A4-4242-B5CD-D03EB0E7EAEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26EF67C7-A9A4-4242-B5CD-D03EB0E7EAEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26EF67C7-A9A4-4242-B5CD-D03EB0E7EAEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26EF67C7-A9A4-4242-B5CD-D03EB0E7EAEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A0EEA62C-4D8F-4C06-AFC8-FB819E159DF4} = {66F0593A-E122-4ECE-B998-EB22C07C5B72}
 		{ECD84326-8607-4BEA-BFD5-F0DB352EC834} = {CD8D646D-E7D9-4DC7-9DB2-5FA4CBF7F230}
 		{A55CCAAB-EB7C-4F62-9BF5-B73826772EEB} = {EEC5D5CE-105A-4FF6-A659-56AF71C1436F}
 		{3E7EFBD8-A478-44FC-A7EF-6384785499B9} = {30A783CE-75A5-4D4B-A5C9-B75EFBE58023}
+		{A3C7AD97-D2B8-4FB1-881E-F1F37ACFDAAD} = {66F0593A-E122-4ECE-B998-EB22C07C5B72}
+		{26EF67C7-A9A4-4242-B5CD-D03EB0E7EAEC} = {66F0593A-E122-4ECE-B998-EB22C07C5B72}
 	EndGlobalSection
 EndGlobal
