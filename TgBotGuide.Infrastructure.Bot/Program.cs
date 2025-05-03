@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging; // добавьте это
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using TgBotGuide.Application.Interfaces.Bot;
@@ -6,6 +7,10 @@ using TgBotGuide.Infrastructure.Bot.Services;
 using TgBotGuide.Infrastructure.Refit.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Настройка логгирования
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -29,14 +34,22 @@ builder.Services.AddScoped<TelegramBotService>(provider =>
 
 var app = builder.Build();
 
+app.MapGet("/", () => "Hello World!");
+
 // Запускаем polling для получения обновлений от Telegram
 using (var scope = app.Services.CreateScope())
 {
-    var telegramBotService = scope.ServiceProvider.GetRequiredService<TelegramBotService>();
-    var cancellationToken = app.Lifetime.ApplicationStopping;
-    await telegramBotService.StartPollingAsync(cancellationToken);
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    try
+    {
+        var telegramBotService = scope.ServiceProvider.GetRequiredService<TelegramBotService>();
+        var cancellationToken = app.Lifetime.ApplicationStopping;
+        await telegramBotService.StartPollingAsync(cancellationToken);
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Ошибка при запуске Telegram Bot Service.");
+    }
 }
-
-app.MapGet("/", () => "Hello World!");
 
 app.Run();

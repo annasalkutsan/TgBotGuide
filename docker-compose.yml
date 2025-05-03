@@ -54,6 +54,27 @@
     networks:
       - api_network
 
+  bot:
+    build:
+      context: .
+      dockerfile: ./SolutionItems/DockerfileBot
+    image: bot
+    ports:
+      - "${BOT_API_PORT}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks:
+      - api_network
+    env_file:
+      - .env
+    environment:
+      - TelegramBotOptions__Token=${TOKEN}
+      - RefitSettings__BaseUrl=${API_URI}
+    restart: always
+
 networks:
   api_network:
     driver: bridge
